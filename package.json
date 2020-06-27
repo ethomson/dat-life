@@ -1,0 +1,38 @@
+{
+  "name": "dat-life",
+  "version": "0.1.0",
+  "description": "Conway's Game of Life",
+  "main": "lib/index.js",
+  "files": [
+    "examples"
+  ],
+  "scripts": {
+    "build": "tsc -d",
+    "dev": "tsc -d --watch",
+    "test": "mocha -r ts-node/register test/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethomson/dat-life.git"
+  },
+  "keywords": [
+    "Conway",
+    "Game of Life",
+    "Life",
+    "Cellular Automata"
+  ],
+  "author": "Edward Thomson <ethomson@edwardthomson.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ethomson/dat-life/issues"
+  },
+  "homepage": "https://github.com/ethomson/dat-life#readme",
+  "devDependencies": {
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
+  }
+}
