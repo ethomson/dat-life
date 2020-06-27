@@ -2,6 +2,7 @@ export class Life {
     private width: number;
     private height: number;
     private colors: number;
+    private decay: boolean;
 
     private board: number[];
     private generation: number;
@@ -11,6 +12,7 @@ export class Life {
         this.width = width;
         this.height = height;
         this.colors = 1;
+        this.decay = false;
 
         this.board = this.createBoard();
         this.generation = 1;
@@ -111,6 +113,10 @@ export class Life {
             }
         });
     }
+
+    setDecay(decay: boolean) {
+        this.decay = decay;
+    }
     
     getBoard(): number[] {
         return this.board.slice();
@@ -122,6 +128,10 @@ export class Life {
 
     getGeneration(): number {
         return this.generation;
+    }
+
+    getDecay(): boolean {
+        return this.decay;
     }
 
     randomize(): number[] {
@@ -198,6 +208,14 @@ export class Life {
         throw new Error('unsolved color');
     }
 
+    private diminish(current: number) {
+        if (this.decay) {
+            return current - 1;
+        }
+
+        return 0;
+    }
+
     next(): number[] {
         const next = this.createBoard();
 
@@ -211,10 +229,10 @@ export class Life {
             const count = neighbors.filter((x) => { return x !== 0 }).length;
 
             if (alive && count < 2) {
-                next[idx] = 0; // exposure
+                next[idx] = this.diminish(this.board[idx]); // exposure
             }
             else if (alive && count > 3) {
-                next[idx] = 0; // overcrowding
+                next[idx] = this.diminish(this.board[idx]); // overcrowding
             }
             else if (!alive && count === 3) {
                 next[idx] = this.getColor(neighbors); // birth

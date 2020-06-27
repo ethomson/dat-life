@@ -221,6 +221,27 @@ describe('life', () => {
                 0, 0, 0, 0, 0, 0,
             ]);
         });
+        it('can decay in color mode instead of instant death', () => {
+            const life = new Life(6, 6);
+            life.setColors(4);
+            life.setDecay(true);
+            life.setBoard([
+                0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0,
+                0, 0, 2, 3, 4, 0,
+                0, 4, 2, 3, 0, 0,
+                0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0,
+            ]);
+            expect(life.next()).to.eql([
+                0, 0, 0, 0, 0, 0,
+                0, 0, 0, 1, 0, 0,
+                0, 2, 1, 2, 4, 0,
+                0, 4, 1, 2, 3, 0,
+                0, 0, 1, 0, 0, 0,
+                0, 0, 0, 0, 0, 0,
+            ]);
+        });
     });
     describe('patterns', () => {
         it('block is still life', () => {

@@ -11,12 +11,19 @@ const height = (process.stdout.rows || 24) - 1;
 
 const life = new Life(width, height);
 
-if (process.argv.length == 3) {
-    if (process.argv[2] === '--2') {
+for (let i = 2; i < process.argv.length; i++) {
+    if (process.argv[i] === '--2') {
         life.setColors(2);
     }
-    else if (process.argv[2] === '--4') {
+    else if (process.argv[i] === '--4') {
         life.setColors(4);
+    }
+    else if (process.argv[i] === '--decay') {
+        life.setDecay(true);
+    }
+    else {
+        console.error(`unknown argument: ${process.argv[i]}`);
+        process.exit(1);
     }
 }
 
