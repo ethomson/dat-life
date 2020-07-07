@@ -10,6 +10,7 @@ const width = (process.stdout.columns || 80);
 const height = (process.stdout.rows || 24) - 1;
 
 const life = new Life(width, height);
+let delay = 500;
 
 for (let i = 2; i < process.argv.length; i++) {
     if (process.argv[i] === '--2') {
@@ -20,6 +21,19 @@ for (let i = 2; i < process.argv.length; i++) {
     }
     else if (process.argv[i] === '--decay') {
         life.setDecay(true);
+    }
+    else if (process.argv[i] === '--delay') {
+        if (i + 1 == process.argv.length) {
+            console.error(`argument expected, usage: --delay <ms>`);
+            process.exit(1);
+        }
+
+        delay = process.argv[++i];
+
+        if (!delay.match(/^\d+$/)) {
+            console.error(`argument expected, usage: --delay <ms>`);
+            process.exit(1);
+        }
     }
     else {
         console.error(`unknown argument: ${process.argv[i]}`);
@@ -61,5 +75,5 @@ function draw(life) {
     process.stdout.write(`Generation: ${life.getGeneration()} / Population: ${life.getPopulation()}`); 
 
     life.next();
-    setTimeout(draw, 500, life);
+    setTimeout(draw, delay, life);
 }
