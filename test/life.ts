@@ -103,10 +103,7 @@ describe('life', () => {
                 0, 0, 0, 0, 0, 0, 0,
             ]);
 
-            console.log(`oy oy oy oy oy oy oy`);
-
-            const foo = life.next();
-            console.log(`ahhh ${foo.length}`);
+            life.next();
             expect(life.getBoard()).to.eql([
                 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0,
@@ -114,8 +111,6 @@ describe('life', () => {
                 0, 1, 1, 0, 0, 0, 0,
                 0, 1, 0, 0, 0, 0, 0,
             ]);
-
-            console.log(`yo yo yo yo yo yo yo`);
 
             life.next();
             expect(life.getBoard()).to.eql([
